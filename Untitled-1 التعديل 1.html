@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <section class="hero is-primary is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">Add new order</h1>
+        </div>
+      </div>
+    </section>
+    <form id="form" class="container m-4 pl-4" method="POST">
+      <div class="field">
+        <label class="label">Store Name</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Store Name"
+            name="Store Name"
+          />
+        </div>
+      </div>
+  
+      <div class="field">
+        <label class="label">Payment Method</label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="Payment Method" value="Cash" /> Cash
+          </label>
+          <label class="radio">
+            <input type="radio" name="Payment Method" value="Piad" /> Piad
+          </label>
+        </div>
+      </div>
+  
+      <div class="field">
+        <label class="label">Order Amount (BHD)</label>
+        <div class="control">
+          <div class="field has-addons">
+            <p class="control">
+              <a class="button is-static">
+                BHD
+              </a>
+            </p>
+            <p class="control is-expanded">
+              <input class="input" type="number" placeholder="Order Amount" name="Order Amount" id="orderAmountInput" step="0.001">
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Delivery Type</label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="Delivery Type" value="Express" onchange="updateDeliveryAmount()" /> Express (0.850 BD)
+          </label>
+          <label class="radio">
+            <input type="radio" name="Delivery Type" value="Super Express" onchange="updateDeliveryAmount()" /> Super Express (1.00 BD)
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Delivery Amount (BHD)</label>
+        <div class="control">
+          <div class="field has-addons">
+            <p class="control">
+              <a class="button is-static">
+                BHD
+              </a>
+            </p>
+            <p class="control is-expanded">
+              <input class="input" type="text" id="deliveryAmountInput" placeholder="Delivery Amount" name="Delivery Amount" readonly>
+            </p>
+          </div>
+        </div>
+      </div>
+  
+
+      <div class="field">
+        <label class="label">Total Amount (BHD)</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Total Amount" name="Total Amount" id="totalAmountInput" readonly>
+        </div>
+      </div>
+      
+
+      <div class="field">
+        <label class="label">Customer Name</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Customer Name"
+            name="Customer Name"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Customer Number</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Customer Number"
+            name="Customer Number"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Area</label>
+        <div class="control">
+          <div class="select">
+            <select id="areaSelect" name="Area" onchange="populateBlockOptions()">
+              <option value="">Select an area</option>
+              <option value="Manama">Manama</option>
+              <option value="Muharraq">Muharraq</option>
+              <option value="Riffa">Riffa</option>
+              <!-- Add more options for other areas -->
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Block</label>
+        <div class="control">
+          <div class="select">
+            <select id="blockSelect" name="Block">
+              <option value="">Select a block</option>
+              <!-- Options will be dynamically populated based on selected area -->
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Road</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Road"
+            name="Road"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">House</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="House"
+            name="House"
+          />
+        </div>
+      </div>
+  
+      <div class="field">
+        <label class="label">Customer Location</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Customer Location"
+            name="Customer Location"
+          />
+        </div>
+      </div>
+  
+  
+      <div class="field">
+        <label class="label">Item Type</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Item Type"
+            name="Item Type"
+          />
+        </div>
+      </div>
+  
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary" type="submit" id="submit-button" style="width: 200px;">
+            Submit
+          </button>
+        </div>
+      </div>
+      <form>
+        <div
+          id="message"
+          style="
+            display: none;
+            margin: 20px;
+            font-weight: bold;
+            color: green;
+            padding: 8px;
+            background-color: beige;
+            border-radius: 4px;
+            border-color: aquamarine;
+          "
+        ></div>
+      </form>
+      
+      
+
+    <script>
+      // ... كودك هنا ...
+  
+       // Define the available blocks for each area
+       var blocksByArea = {
+            Manama: ["Block 1", "Block 2", "Block 3"],
+            Muharraq: ["Block A", "Block B", "Block C"],
+            Riffa: ["Block X", "Block Y", "Block Z"],
+            // Add more blocks for other areas
+          };
+        
+          // Function to populate the block select options based on the selected area
+          function populateBlockOptions() {
+            var areaSelect = document.getElementById("areaSelect");
+            var blockSelect = document.getElementById("blockSelect");
+            var selectedArea = areaSelect.value;
+        
+            blockSelect.innerHTML = ""; // Clear previous options
+        
+            if (blocksByArea.hasOwnProperty(selectedArea)) {
+              var blocks = blocksByArea[selectedArea];
+              blocks.forEach(function (block) {
+                var option = document.createElement("option");
+                option.value = block;
+                option.text = block;
+                blockSelect.appendChild(option);
+              });
+            }
+            
+            // Update delivery amount based on selected delivery type
+            updateDeliveryAmount();
+           }
+             
+           
+            // استدعاء الدالة updateDeliveryAmount عند تحميل الصفحة
+            window.addEventListener("load", function() {
+                var expressRadio = document.querySelector('input[name="Delivery Type"][value="Express"]');
+                expressRadio.checked = true; // تحديد خيار "Express" كمحدد مبدئيًا
+                updateDeliveryAmount(); // استدعاء الدالة لتحديث مبلغ التسليم
+            });
+
+        // Function to update delivery amount based on selected delivery type
+        function updateDeliveryAmount() {
+            var expressRadio = document.querySelector('input[name="Delivery Type"][value="Express"]');
+            var superExpressRadio = document.querySelector('input[name="Delivery Type"][value="Super Express"]');
+            var deliveryAmountInput = document.getElementById("deliveryAmountInput");
+            var selectedDeliveryType = "";
+
+            if (expressRadio.checked) {
+             selectedDeliveryType = "Express";
+             deliveryAmountInput.value = "0.850";
+             } else if (superExpressRadio.checked) {
+              selectedDeliveryType = "Super Express";
+              deliveryAmountInput.value = "1";
+            }
+
+          calculateTotalAmount(); // Call the function to update the total amount
+     }
+      
+        function calculateTotalAmount() {
+          var orderAmountInput = document.getElementById("orderAmountInput");
+          var deliveryAmountInput = document.getElementById("deliveryAmountInput");
+          var totalAmountInput = document.getElementById("totalAmountInput");
+
+          var orderAmount = parseFloat(orderAmountInput.value);
+          var deliveryAmount = parseFloat(deliveryAmountInput.value);
+          var totalAmount = orderAmount + deliveryAmount;
+
+        totalAmountInput.value = totalAmount.toFixed(3);
+        // استدعاء الدالة calculateTotalAmount عند تغير قيمة Order Amount (BHD)
+          var orderAmountInput = document.getElementById("orderAmountInput");
+        orderAmountInput.addEventListener("input", calculateTotalAmount);
+     }
+
+  
+          
+          // Rest of the script
+          document.getElementById("form").addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent the default form submission
+            document.getElementById("message").textContent = "Submitting..";
+            document.getElementById("message").style.display = "block";
+            document.getElementById("submit-button").disabled = true;
+        
+            // Collect the form data
+            var formData = new FormData(this);
+            var keyValuePairs = [];
+            for (var pair of formData.entries()) {
+              keyValuePairs.push(pair[0] + "=" + pair[1]);
+            }
+        
+            var formDataString = keyValuePairs.join("&");
+        
+            // Send a POST request to your Google Apps Script
+            fetch(
+              "https://script.google.com/macros/s/AKfycbzPoGfHotKti46LbYIaeHtRydAwCs6Cci4NZUJD5l4rGZSiRxmNmlTn8DB6L_84D4zpdg/exec",
+              {
+                redirect: "follow",
+                method: "POST",
+                body: formDataString,
+                headers: {
+                  "Content-Type": "text/plain;charset=utf-8",
+                },
+              }
+            )
+              .then(function (response) {
+                // Check if the request was successful
+                if (response) {
+                  return response; // Assuming your script returns JSON response
+                } else {
+                  throw new Error("Failed to submit the form.");
+                }
+              })
+              .then(function (data) {
+                // Display a success message
+                document.getElementById("message").textContent =
+                  "Data submitted successfully!";
+                document.getElementById("message").style.display = "block";
+                document.getElementById("message").style.backgroundColor = "green";
+                document.getElementById("message").style.color = "beige";
+                document.getElementById("submit-button").disabled = false;
+                document.getElementById("form").reset();
+        
+                setTimeout(function () {
+                  document.getElementById("message").textContent = "";
+                  document.getElementById("message").style.display = "none";
+                }, 2600);
+              })
+              .catch(function (error) {
+                // Handle errors, you can display an error message here
+                console.error(error);
+                document.getElementById("message").textContent =
+                  "An error occurred while submitting the form.";
+                document.getElementById("message").style.display = "block";
+              });
+          });
+    </script>
+  </body>
+  </html>
+  
