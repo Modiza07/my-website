@@ -1,367 +1,877 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      /* تنسيقات CSS العامة هنا */
-      
-      @media (max-width: 600px) {
-        body {
-          background-color: white; /* تغيير لون خلفية الصفحة للأجهزة المحمولة */
-        }
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* تنسيقات CSS العامة هنا */
+    @media (max-width: 600px) {
+      body {
+        background-color: white; /* تغيير لون خلفية الصفحة للأجهزة المحمولة */
       }
-    </style>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
-  </head>
-  <body>
-    <section class="hero is-primary is-bold">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">Add new order</h1>
-        </div>
-      </div>
-    </section>
-    <form id="form" class="container m-4 pl-4" method="POST">
-      <div class="field">
-        <label class="label">Store Name</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Store Name"
-            name="Store Name"
-          />
-        </div>
-      </div>
-  
-      <div class="field">
-        <label class="label">Payment Method</label>
-        <div class="control">
-          <label class="radio">
-            <input type="radio" name="Payment Method" value="Cash" /> Cash
-          </label>
-          <label class="radio">
-            <input type="radio" name="Payment Method" value="Piad" /> Piad
-          </label>
-        </div>
-      </div>
-  
-      <div class="field">
-        <label class="label">Order Amount (BHD)</label>
-        <div class="control">
-          <div class="field has-addons">
-            <p class="control">
-              <a class="button is-static">
-                BHD
-              </a>
-            </p>
-            <p class="control is-expanded">
-              <input class="input" type="number" placeholder="Order Amount" name="Order Amount" id="orderAmountInput" step="0.001">
-            </p>
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
+</head>
+<body>
+  <section class="hero is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-vcentered">
+          <div class="column is-6">
+            <h1 class="title">Add new order</h1>
+          </div>
+          <div class="column is-6">
+            <figure class="image is-3by1">
+              <img src="https://l.top4top.io/p_29094esjs1.png">
+            </figure>
           </div>
         </div>
       </div>
-
-      <div class="field">
-        <label class="label">Delivery Type</label>
-        <div class="control">
-          <label class="radio">
-            <input type="radio" name="Delivery Type" value="Express" onchange="updateDeliveryAmount()" /> Express (0.850 BD)
-          </label>
-          <label class="radio">
-            <input type="radio" name="Delivery Type" value="Super Express" onchange="updateDeliveryAmount()" /> Super Express (1.00 BD)
-          </label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Delivery Amount (BHD)</label>
-        <div class="control">
-          <div class="field has-addons">
-            <p class="control">
-              <a class="button is-static">
-                BHD
-              </a>
-            </p>
-            <p class="control is-expanded">
-              <input class="input" type="text" id="deliveryAmountInput" placeholder="Delivery Amount" name="Delivery Amount" readonly>
-            </p>
+    </div>
+    <progress class="progress is-small is-primary" max="100">15%</progress>
+  </section>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">
+        Your Logo
+      </a>
+      <a class="navbar-item" href="https://wa.me/1234567890">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a class="navbar-item" href="https://www.instagram.com/your_account">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </nav>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">
+        Your Logo
+      </a>
+      <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="#">
+          Home
+        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Services
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">
+              Service 1
+            </a>
+            <a class="navbar-item" href="#">
+              Service 2
+            </a>
+            <a class="navbar-item" href="#">
+              Service 3
+            </a>
           </div>
         </div>
       </div>
-  
-
-      <div class="field">
-        <label class="label">Total Amount (BHD)</label>
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">
+          Contact
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="notification is-warning is-light">
+    <button class="delete"></button>
+    You can now add any order you wish to deliver <strong>We will deliver the order as soon as possible</strong>.
+  </div>
+  <div class="tabs is-toggle is-toggle-rounded">
+    <ul>
+      <li class="is-active">
+        <a href="" target="_blank">
+          <span class="icon is-small">
+            <i class="fa fa-desktop" aria-hidden="true"></i>
+          </span>
+          <span>Web Order Entry Form</span>
+        </a>
+      </li>
+      <li>
+        <a href="" target="_blank">
+          <span class="icon is-small">
+            <i class="fab fa-google" aria-hidden="true"></i>
+          </span>
+          <span>Google Sheet Entry Form</span>
+        </a>
+      </li>
+      <li>
+        <a href="" target="_blank">
+          <span class="icon is-small">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+          </span>
+          <span>Register as a regular client</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://wa.me/0097336110255/?text=urlencodedtext" target="_blank">
+          <span class="icon is-small">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          </span>
+          <span>Whatsapp</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://instagram.com" target="_blank">
+          <span class="icon is-small">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </span>
+          <span>Instagram</span>
+        </a>
+      </li>
+      <li>
+        <a href="" target="_blank">
+          <span class="icon is-small">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+          </span>
+          <span> Find Us</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <form id="form" class="container m-4 pl-4" method="POST">
+    <div class="field">
+      <label class="label">Client Name *</label>
+      <div class="control">
+        <input class="input is-focused" type="text" placeholder="Client Name" name="Client Name">
+      </div>
+    </div>
+    <div class="field">
+        <label class="label">Payment Method *</label>
         <div class="control">
-          <input class="input" type="text" placeholder="Total Amount" name="Total Amount" id="totalAmountInput" readonly>
+          <div class="card">
+            <footer class="card-footer">
+              <label class="card-footer-item">
+                <input type="radio" name="Payment Method" value="Cash">
+                <span class="ml-2" style="display: flex; align-items: center;">
+                  <span>Cash</span>
+                  <span class="icon is-small" style="margin-left: 5px;">
+                    <i class="fas fa-money-bill"></i>
+                  </span>
+                </span>
+              </label>
+              <label class="card-footer-item">
+                <input type="radio" name="Payment Method" value="Paid">
+                <span class="ml-2" style="display: flex; align-items: center;">
+                  <span>Paid</span>
+                  <span class="icon is-small" style="margin-left: 5px;">
+                    <i class="fas fa-credit-card"></i>
+                  </span>
+                </span>
+              </label>
+            </footer>
+          </div>
+        </div>
+      </div>
+    <div class="field">
+      <label class="label">Order Amount (BHD) *</label>
+      <div class="control">
+        <div class="field has-addons">
+          <p class="control">
+            <a class="button is-static">BHD</a>
+          </p>
+          <p class="control is-expanded">
+            <input class="input is-focused" type="number" placeholder="Order Amount" name="Order Amount" id="orderAmountInput" step="0.001">
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+        <label class="label">Delivery Type *</label>
+        <div class="control">
+          <div class="card">
+            <footer class="card-footer">
+              <label class="card-footer-item">
+                <input type="radio" name="Delivery Type" value="Express" onchange="updateDeliveryAmount()">
+                <span class="ml-2" style="display: flex; align-items: center;">
+                  <span>Express (0.850 BD)</span>
+                  <span class="icon is-small" style="margin-left: 5px;">
+                    <i class="fas fa-shipping-fast"></i>
+                  </span>
+                </span>
+              </label>
+              <label class="card-footer-item">
+                <input type="radio" name="Delivery Type" value="Super Express" onchange="updateDeliveryAmount()">
+                <span class="ml-2" style="display: flex; align-items: center;">
+                  <span>Super Express (1.00 BD)</span>
+                  <span class="icon is-small" style="margin-left: 5px;">
+                    <i class="fas fa-rocket"></i>
+                  </span>
+                </span>
+              </label>
+            </footer>
+          </div>
         </div>
       </div>
       
+    <div class="field">
+      <label class="label">Delivery Amount (BHD)</label>
+      <div class="control">
+        <div class="field has-addons">
+          <p class="control">
+            <a class="button is-static">BHD</a>
+          </p>
+          <p class="control is-expanded">
+            <input class="input is-focused is-warning" type="text" id="deliveryAmountInput" placeholder="Delivery Amount" name="Delivery Amount" readonly>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Total Amount (BHD)</label>
+      <div class="control">
+        <input class="input is-focused is-warning" type="text" placeholder="Total Amount" name="Total Amount" id="totalAmountInput" readonly>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Customer Name *</label>
+      <div class="control">
+        <input class="input is-focused" type="text" placeholder="Customer Name" name="Customer Name">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Customer Number *</label>
+      <div class="control">
+        <input class="input is-focused" type="text" placeholder="Customer Number" name="Customer Number">
+      </div>
+    </div>
 
-      <div class="field">
-        <label class="label">Customer Name</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Customer Name"
-            name="Customer Name"
-          />
-        </div>
-      </div>
 
-      <div class="field">
-        <label class="label">Customer Number</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Customer Number"
-            name="Customer Number"
-          />
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Area</label>
-        <div class="control">
-          <div class="select">
-            <select id="areaSelect" name="Area" onchange="populateBlockOptions()">
-              <option value="">Select an area</option>
-              <option value="Manama">Manama</option>
-              <option value="Muharraq">Muharraq</option>
-              <option value="Riffa">Riffa</option>
-              <!-- Add more options for other areas -->
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Block</label>
-        <div class="control">
-          <div class="select">
-            <select id="blockSelect" name="Block">
-              <option value="">Select a block</option>
-              <!-- Options will be dynamically populated based on selected area -->
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Road</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Road"
-            name="Road"
-          />
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">House</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="House"
-            name="House"
-          />
-        </div>
-      </div>
-  
-      <div class="field">
-        <label class="label">Customer Location</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Customer Location"
-            name="Customer Location"
-          />
-        </div>
-      </div>
-  
-  
-      <div class="field">
-        <label class="label">Item Type</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Item Type"
-            name="Item Type"
-          />
-        </div>
-      </div>
-  
-      <div class="field is-grouped">
-        <div class="control">
-          <button class="button is-primary" type="submit" id="submit-button" style="width: 200px;">
-            Submit
-          </button>
-        </div>
-      </div>
-      <form>
-        <div
-          id="message"
-          style="
-            display: none;
-            margin: 20px;
-            font-weight: bold;
-            color: green;
-            padding: 8px;
-            background-color: beige;
-            border-radius: 4px;
-            border-color: aquamarine;
-          "
-        ></div>
-      </form>
-      
-      
-
-    <script>
-      // ... كودك هنا ...
-  
-       // Define the available blocks for each area
-       var blocksByArea = {
-            Manama: ["Block 1", "Block 2", "Block 3"],
-            Muharraq: ["Block A", "Block B", "Block C"],
-            Riffa: ["Block X", "Block Y", "Block Z"],
-            // Add more blocks for other areas
-          };
-        
-          // Function to populate the block select options based on the selected area
-          function populateBlockOptions() {
-            var areaSelect = document.getElementById("areaSelect");
-            var blockSelect = document.getElementById("blockSelect");
-            var selectedArea = areaSelect.value;
-        
-            blockSelect.innerHTML = ""; // Clear previous options
-        
-            if (blocksByArea.hasOwnProperty(selectedArea)) {
-              var blocks = blocksByArea[selectedArea];
-              blocks.forEach(function (block) {
-                var option = document.createElement("option");
-                option.value = block;
-                option.text = block;
-                blockSelect.appendChild(option);
-              });
-            }
+    <div class="field">
+      <label class="label">Area *</label>
+      <div class="control has-icons-left">
+        <div class="select is-fullwidth is-success">
+          <select id="areaSelect" name="Area" onchange="populateBlockOptions()">
+            <option value="">Select an area</option>
+            <option value="Aali">A'ali</option>
+            <option value="AbuBuham">Abu Buham</option>
+            <option value="AbuSaiba">Abu Saiba</option>
+            <option value="Adhari">Adhari</option>
+<option value="Adliya">Adliya</option>
+<option value="AkerEast">Aker East</option>
+<option value="Akerwest">Aker west</option>
+<option value="AlBuhair">Al Buhair</option>
+<option value="AlBurhama">Al Burhama</option>
+<option value="AlCornish">Al Cornish</option>
+<option value="AlDaih">Al Daih</option>
+<option value="AlDair">Al Dair</option>
+<option value="AlDoor">Al Door</option>
+<option value="AlFateh">Al Fateh</option>
+<option value="AlGainah">Al Gainah</option>
+<option value="Alhajar">Al hajar</option>
+<option value="AlHajyat">Al Hajyat</option>
+<option value="AlHessy">Al Hessy</option>
+<option value="AlHidd">Al Hidd</option>
+<option value="Alhunaniya">Al hunaniya</option>
+<option value="AlJaseera">Al Jaseera</option>
+<option value="AlJasra">Al Jasra</option>
+<option value="AlKhamis">Al Khamis</option>
+<option value="AlLawzi">Al Lawzi</option>
+<option value="Almamtala">Al mamtala</option>
+<option value="AlMarkh">Al Markh</option>
+<option value="AlMazrooeeah">Al Mazrooeeah</option>
+<option value="AlMoaaskar">Al Moaaskar</option>
+<option value="AlMusalla">Al Musalla</option>
+<option value="AlNasfa">Al Nasfa</option>
+<option value="AlOmar">Al Omar</option>
+<option value="AlQadam">Al Qadam</option>
+<option value="AlQalaa">Al Qala'a</option>
+<option value="AlQarah">Al Qarah</option>
+<option value="AlQareen">Al Qareen</option>
+<option value="AlQufool">Al Qufool</option>
+<option value="AlQuraya">Al Quraya</option>
+<option value="AlRasameen">Al Rasameen</option>
+<option value="AlRawdha">Al Rawdha</option>
+<option value="AlSafriya">Al Safriya</option>
+<option value="AlSayh">Al Sayh</option>
+<option value="AlSowaifia">Al Sowaifia</option>
+<option value="Amwaj">Amwaj</option>
+<option value="Arad">Arad</option>
+<option value="Asker">Asker</option>
+<option value="Awali">Awali</option>
+<option value="BaniJamra">Bani Jamra</option>
+<option value="BarAlDur">Bar Al Dur</option>
+<option value="Barbar">Barbar</option>
+<option value="BelajAlJazair">Belaj Al Jazair</option>
+<option value="BiladAlQadeem">Bilad AlQadeem</option>
+<option value="BuAshira">Bu Ashira</option>
+<option value="BuAshira">Bu Ashira</option>
+<option value="BuGhazal">Bu Ghazal</option>
+<option value="BuKwarah">Bu Kwarah</option>
+<option value="BuQuwah">Bu Quwah</option>
+<option value="Budaiya">Budaiya</option>
+<option value="Buri">Buri</option>
+<option value="Busaiteen">Busaiteen</option>
+<option value="DarKulaib">Dar Kulaib</option>
+<option value="Dilmunia">Dilmunia</option>
+<option value="DiplomaticArea">Diplomatic Area</option>
+<option value="Diraz">Diraz</option>
+<option value="DiyarAlMuharraq">Diyar Al Muharraq</option>
+            <option value="Dumistan">Dumistan</option>
+<option value="DurratAlBahrain">Durrat Al Bahrain</option>
+<option value="AlHiddEast">Al Hidd East</option>
+<option value="RiffaEast">Riffa East</option>
+<option value="Galali">Galali</option>
+<option value="Ghureifa">Ghureifa</option>
+<option value="Gudaibiya">Gudaibiya</option>
+<option value="Hafeera">Hafeera</option>
+<option value="Hamadtown">Hamad town</option>
+<option value="HawaratAali">Hawarat A"ali</option>
+<option value="HawratSanad">Hawrat Sanad</option>
+<option value="Hmala">Hmala</option>
+<option value="Hoora">Hoora</option>
+<option value="IsaTown">Isa Town</option>
+<option value="JabaltHibshi">Jabalt Hibshi</option>
+<option value="JadAlJamal">Jad Al Jamal</option>
+<option value="Janabiya">Janabiya</option>
+<option value="Jannusan">Jannusan</option>
+<option value="Jaw">Jaw</option>
+<option value="Jidalhaj">Jid alhaj</option>
+<option value="JiddAli">Jidd Ali</option>
+<option value="Jidhafs">Jidhafs</option>
+<option value="Jirdab">Jirdab</option>
+<option value="Juffair">Juffair</option>
+<option value="Jumeirah">Jumeirah</option>
+<option value="Karana">Karana</option>
+<option value="Karbabad">Karbabad</option>
+<option value="Karzakkan">Karzakkan</option>
+<option value="Maameer">Maameer</option>
+<option value="Magabah">Magabah</option>
+<option value="Mahooz">Mahooz</option>
+<option value="Malkiya">Malkiya</option>
+<option value="Manama">Manama</option>
+<option value="Maqsha">Maqsha</option>
+<option value="Mazraa">Mazraa</option>
+<option value="MinaaSalman">Minaa Salman</option>
+<option value="Msainsat">Msainsat</option>
+<option value="Muharraq">Muharraq</option>
+<option value="NabihSaleh">Nabih Saleh</option>
+<option value="Noaim">Noaim</option>
+<option value="NorthernCity">Northern City</option>
+<option value="Nuwaidrat">Nuwaidrat</option>
+<option value="RasAbuJarjor">Ras Abu Jarjor</option>
+<option value="RasHayan">Ras Hayan</option>
+<option value="RasRuman">Ras Ruman</option>
+<option value="RasZuwaid">Ras Zuwaid</option>
+<option value="Riffa">Riffa</option>
+<option value="RiffaNorth">Riffa North</option>
+<option value="Saar">Saar</option>
+<option value="Sadad">Sadad</option>
+<option value="Safrah">Safrah</option>
+<option value="Salhiya">Salhiya</option>
+<option value="Salmabad">Salmabad</option>
+<option value="Salmaniya">Salmaniya</option>
+<option value="Samaheej">Samaheej</option>
+<option value="Sanabis">Sanabis</option>
+<option value="Sanad">Sanad</option>
+<option value="Seef">Seef</option>
+<option value="SehlaNorthern">Sehla Northern</option>
+<option value="SehlaSouthern">Sehla Southern</option>
+<option value="Shahrakan">Shahrakan</option>
+<option value="Shakhura">Shakhura</option>
+<option value="Sitra">Sitra</option>
+<option value="SitraAbuAlAish">Sitra - Abu AlAish</option>
+<option value="SitraAlKharjiya">Sitra - Al Kharjiya</option>
+<option value="SitraAlQuraya">Sitra - Al Quraya</option>
+<option value="SitraAlDar">Sitra - AlDar</option>
+<option value="SitraAlHamriya">Sitra - AlHamriya</option>
+<option value="SitraEast">Sitra - East</option>
+<option value="SitraIndustrialregion">Sitra - Industrial region</option>
+<option value="SitraMarkuban">Sitra - Markuban</option>
+<option value="SitraMuhazza">Sitra - Muhazza</option>
+<option value="SitraSufala">Sitra - Sufala</option>
+<option value="SitraUmAlbaidh">Sitra - Um Albaidh</option>
+<option value="SitraWadiyan">Sitra - Wadiyan</option>
+<option value="Sukhair">Sukhair</option>
+<option value="Tashan">Tashan</option>
+<option value="Tubli">Tubli</option>
+<option value="UmAlHassam">Um Al Hassam</option>
+<option value="UmJderAlSaman">Um Jder AlSaman</option>
+<option value="WadiAlSail">Wadi Al Sail</option>
+<option value="WadiAli">Wadi Ali</option>
+<option value="RiffaWest">Riffa West</option>
+<option value="Zallaq">Zallaq</option>
+<option value="ZayedTown">Zayed Town</option>
+            <option value="Zinj">Zinj</option>
             
-            // Update delivery amount based on selected delivery type
-            updateDeliveryAmount();
-           }
-             
-           
-            // استدعاء الدالة updateDeliveryAmount عند تحميل الصفحة
-            window.addEventListener("load", function() {
-                var expressRadio = document.querySelector('input[name="Delivery Type"][value="Express"]');
-                expressRadio.checked = true; // تحديد خيار "Express" كمحدد مبدئيًا
-                updateDeliveryAmount(); // استدعاء الدالة لتحديث مبلغ التسليم
-            });
 
-        // Function to update delivery amount based on selected delivery type
-        function updateDeliveryAmount() {
-            var expressRadio = document.querySelector('input[name="Delivery Type"][value="Express"]');
-            var superExpressRadio = document.querySelector('input[name="Delivery Type"][value="Super Express"]');
-            var deliveryAmountInput = document.getElementById("deliveryAmountInput");
-            var selectedDeliveryType = "";
 
-            if (expressRadio.checked) {
-             selectedDeliveryType = "Express";
-             deliveryAmountInput.value = "0.850";
-             } else if (superExpressRadio.checked) {
-              selectedDeliveryType = "Super Express";
-              deliveryAmountInput.value = "1";
-            }
 
-          calculateTotalAmount(); // Call the function to update the total amount
-     }
+
+
+            <!-- Add more options for other areas -->
+          </select>
+          <span class="icon is-small is-left">
+            <i class="fa fa-globe"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="field">
+      <label class="label">Block *</label>
+      <div class="control has-icons-left">
+        <div class="select is-fullwidth is-success">
+          <select id="blockSelect" name="Block">
+            <option value="">Select a block</option>
+            <!-- Options will be dynamically populated based on selected area -->
+          </select>
+          <span class="icon is-small is-left">
+            <i class="fa fa-globe"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Road *</label>
+      <div class="control">
+        <input class="input is-focused" type="text" placeholder="Road" name="Road">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">House / Building *</label>
+      <div class="control">
+        <input class="input is-focused" type="text" placeholder="House 22 / Building 22, Flat 12" name="House">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Customer Location</label>
+      <div class="control">
+        <input class="input is-focused" type="text" placeholder="Customer Location" name="Customer Location">
+      </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Delivery Time</label>
+        <div class="control">
+          <div class="card">
+            <footer class="card-footer">
+              <label class="card-footer-item">
+                <input type="radio" name="Delivery Time" value="Morning">
+                <span class="ml-2" style="display: flex; align-items: center;">
+                  <span>8:00 AM - 2:00 PM (Morning)</span>
+                  <span class="icon is-small" style="margin-left: 5px;">
+                    <i class="fas fa-sun"></i>
+                  </span>
+                </span>
+              </label>
+              <label class="card-footer-item">
+                <input type="radio" name="Delivery Time" value="Night">
+                <span class="ml-2" style="display: flex; align-items: center;">
+                  <span>4:00 PM - 10:00 PM (Night)</span>
+                  <span class="icon is-small" style="margin-left: 5px;">
+                    <i class="fas fa-moon"></i>
+                  </span>
+                </span>
+              </label>
+            </footer>
+          </div>
+        </div>
+      </div>
+
+    <div class="field">
+      <label class="label">Item Type</label>
+      <div class="control">
+        <input class="input is-warning" type="text" placeholder="Item Type" name="Item Type">
+      </div>
+    </div>
+    
+    <div class="field is-grouped">
+      <button class="button is-primary mr-4" type="submit" id="submit-button" style="width: 200px;" onclick="submitForm()">
+        <span class="icon">
+          <i class="fa fa-check"></i>
+        </span>
+        <span>Submit</span>
+      </button>
+      <button class="button is-danger ml-4" title="Clear button" onclick="clearData()">
+        <span class="icon">
+          <i class="fa fa-times"></i>
+        </span>
+        <span>Clear</span>
+      </button>
+    </div>
+  </form>
+  <div id="message" style="display: none; margin: 20px; font-weight: bold; color: red; padding: 8px; background-color: beige; border-radius: 4px; border-color: aquamarine;"></div>
+  <div id="message" style="display: none; margin: 20px; font-weight: bold; color: green; padding: 8px; background-color: beige; border-radius: 4px; border-color: aquamarine;"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+// الحصول على العنصر "navbar-burger"
+var navbarBurger = document.querySelector('.navbar-burger');
+
+// الحصول على العنصر "navbar-menu"
+var navbarMenu = document.querySelector('.navbar-menu');
+
+// تفعيل القائمة المنسدلة عند النقر على العنصر "navbar-burger"
+navbarBurger.addEventListener('click', function () {
+  navbarBurger.classList.toggle('is-active');
+  navbarMenu.classList.toggle('is-active');
+});
+});
+// ... كودك هنا ...
+
+ // Define the available blocks for each area
+ var blocksByArea = {
+    Aali: ["732","734","736","738","740","742","744","746","748"],
+AbuBuham: ["367"],
+AbuSaiba: ["469","471","473","475"],
+Adhari: ["366","369"],
+Adliya: ["326","327","336","338"],
+AkerEast: ["623"],
+Akerwest: ["624","625","626"],
+AlBuhair: ["933","937","941"],
+AlBurhama: ["354","357"],
+AlCornish: ["322"],
+AlDaih: ["412","414"],
+AlDair: ["231","232","233"],
+AlDoor: ["965"],
+AlFateh: ["324"],
+AlGainah: ["961"],
+AlHajar: ["463","465"],
+AlHajyat: ["929","931","935","939"],
+AlHessy: ["948"],
+AlHidd: ["101","102","103","104","105","106","107","108","109","110","111","112","113","115","116","117","118","119","121" ],
+Alhunaniya: ["901","903"],
+AlJaseera: ["971"],
+AlJasra: ["1001","1002","1003","1004","1006"],
+AlKhamis: ["365"],
+AlLawzi: ["1016","1018","1020"],
+Almamtala: ["1069","1070","1099"],
+AlMarkh: ["529","531","533"],
+AlMazrooeeah: ["943"],
+AlMoaaskar: ["949"],
+AlMusalla: ["411","413"],
+AlNasfa: ["733"],
+AlOmar: ["988"],
+AlQadam: ["447","449","453"],
+AlQalaa: ["438"],
+AlQarah: ["987"],
+AlQareen: ["967"],
+AlQufool: ["312","313"],
+AlQuraya: ["545","547","549","551"],
+AlRasameen: ["981","982"],
+AlRawdha: ["906","930"],
+AlSafriya: ["1041"],
+AlSayh: ["228","229"],
+AlSowaifia: ["351","353"],
+Amwaj: ["257","258"],
+Arad: ["240","241","242","243","244","245","246","247","248"],
+Asker: ["950","951"],
+Awali: ["945","946"],
+BaniJamra: ["537","539","541","543"],
+BarAlDur: ["964","966"],
+Barbar: ["518","520","522","524","526","528","530"],
+BelajAlJazair: ["1061","1063","1064"],
+BiladAlQadeem: ["361","362","363","364"],
+BuAshira: ["328","332"],
+BuAshira: ["328","332"],
+BuGhazal: ["330","331","373"],
+BuKwarah: ["913","017","919","921"],
+BuQuwa: ["455","457"],
+Budaiya: ["550","552","553","555"],
+Buri: ["752","754","756","758","760","762"],
+Busaiteen: ["221","222","223","225","226","227"],
+DarKulaib: ["1046","1048"],
+Dilmunia: ["269"],
+DiplomaticArea: ["317"],
+Diraz: ["536","538","540","542","544"],
+DiyarAlMuharraq: ["263","264","265","266"],
+Dumistan: ["1017","1019","1022"],
+DurratAlBahrain: ["999"],
+AlHiddEast: ["128"],
+RiffaEast: ["905","907","909","911"],
+Galali: ["251","252","253","254","255","256"],
+Gureifa: ["342"],
+Gudaibiya: ["307","308","321","325"],
+Hafeera: ["959"],
+Hamadtown: ["1203","1204","1205","1206","1207","1208","1209","1210","1211","1212","1213","1214","1215","1216"],
+HawaratAali: ["714","730"],
+HawratSanad: ["645"],
+Hmala: ["1009","1010","1012","1014"],
+Hoora: ["318","319","320"],
+IsaTown: ["801","802","803","804","805","806","807","808","809","810","811","812","813","814","815","816","840","841"],
+JabaltHibshi: ["431","433","435"],
+JadAlJamal: ["973"],
+Janabiya: ["561","565","569","571","575","577","578","579"],
+Jannusan: ["502","504","506","508"],
+Jaw: ["957","960"],
+Jidalhaj: ["514"],
+JiddAli: ["721"],
+Jidhafs: ["419","421","422","423","424","425"],
+Jirdab: ["729"],
+Juffair: ["340","341"],
+Jumeirah: ["1067"],
+Karana: ["454","456","458","460"],
+Karbabad: ["430","432","434"],
+Karzakkan: ["1025","1026","1027","1028"],
+Maameer: ["633","634","435","636"],
+Magabah: ["505","507","509","513"],
+Mahooz: ["334"],
+Malkiya: ["1032","1033","1034"],
+Manama: ["301","302","304","305","315","323","344","346","351","353"],
+Maqsha: ["444"],
+Mazraa: ["953"],
+MinaaSalman: ["343"],
+Msainsat: ["983"],
+Muharraq: ["202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","224"],
+NabihSaleh: ["380","381","382"],
+Naim: ["314"],
+NorthernCity: ["532","535"],
+Nuwaidrat: ["643","644","646"],
+RasAbuJarjor: ["954"],
+RasHayan: ["958","963"],
+RasRuman: ["306"],
+RasZuwaid: ["952"],
+Riffa: ["914","915","916","918","922","934","905","907","909","911","902","904","908","910","912","901","903","933","937","941"],
+RiffaNorth: ["914","915","916","918","922","934"],
+Saar: ["515","517","521","523","525","527"],
+Sadad: ["1037","1038"],
+safrah: ["944"],
+Salhiya: ["356"],
+Salmabad: ["702","704","706","708","712"],
+Salmaniya: ["309","310","311","329"],
+Samaheej: ["234","235","236","237"],
+Sanabis: ["402","404","406","408","410"],
+Sanad: ["743","745"],
+Seef: ["428","436"],
+SehlaNorthern: ["439","441"],
+SehlaSouthern: ["368"],
+Shahrakan: ["1042","1044"],
+Shakhura: ["477","479","481"],
+Sitra: ["601","602","603","604","605","606","607","608","609","611","613","614","615","616","617","618","619"],
+SitraAbuAlAish: ["607"],
+SitraAlKharjiya: ["606"],
+SitraAlQuraya: ["604"],
+SitraAlDar: ["613"],
+SitraAlHamriya: ["611"],
+SitraEast: ["617","618","619"],
+SitraIndustrialregion: ["601"],
+SitraMarkuban: ["605"],
+SitraMuhazza: ["602","603"],
+SitraSufala: ["609"],
+SitraUmAlbaidh: ["614","615","616"],
+SitraWadyan: ["608"],
+Sukhair: ["976","985"],
+Tashan: ["405","407"],
+Tubli: ["701","705","707","709","711","713"],
+UmAlHassam: ["333","335","337","339"],
+UmJderAlSaman: ["997"],
+WadiAlSail: ["928","932"],
+WadiAli: ["1086"],
+RiffaWest: ["902","904","908","910","912"],
+Zallaq: ["1051","1052","1054","1055","1056","1057","1058"],
+ZayedTown: ["718","720"],
+Zinj: ["358","359","360"],
       
-        function calculateTotalAmount() {
-          var orderAmountInput = document.getElementById("orderAmountInput");
-          var deliveryAmountInput = document.getElementById("deliveryAmountInput");
-          var totalAmountInput = document.getElementById("totalAmountInput");
 
-          var orderAmount = parseFloat(orderAmountInput.value);
-          var deliveryAmount = parseFloat(deliveryAmountInput.value);
-          var totalAmount = orderAmount + deliveryAmount;
 
-        totalAmountInput.value = totalAmount.toFixed(3);
-        // استدعاء الدالة calculateTotalAmount عند تغير قيمة Order Amount (BHD)
-          var orderAmountInput = document.getElementById("orderAmountInput");
-        orderAmountInput.addEventListener("input", calculateTotalAmount);
-     }
-
+      // Add more blocks for other areas
+    };
   
-          
-          // Rest of the script
-          document.getElementById("form").addEventListener("submit", function (e) {
-            e.preventDefault(); // Prevent the default form submission
-            document.getElementById("message").textContent = "Submitting..";
-            document.getElementById("message").style.display = "block";
-            document.getElementById("submit-button").disabled = true;
-        
-            // Collect the form data
-            var formData = new FormData(this);
-            var keyValuePairs = [];
-            for (var pair of formData.entries()) {
-              keyValuePairs.push(pair[0] + "=" + pair[1]);
-            }
-        
-            var formDataString = keyValuePairs.join("&");
-        
-            // Send a POST request to your Google Apps Script
-            fetch(
-              "https://script.google.com/macros/s/AKfycbzPoGfHotKti46LbYIaeHtRydAwCs6Cci4NZUJD5l4rGZSiRxmNmlTn8DB6L_84D4zpdg/exec",
-              {
-                redirect: "follow",
-                method: "POST",
-                body: formDataString,
-                headers: {
-                  "Content-Type": "text/plain;charset=utf-8",
-                },
-              }
-            )
-              .then(function (response) {
-                // Check if the request was successful
-                if (response) {
-                  return response; // Assuming your script returns JSON response
-                } else {
-                  throw new Error("Failed to submit the form.");
-                }
-              })
-              .then(function (data) {
-                // Display a success message
-                document.getElementById("message").textContent =
-                  "Data submitted successfully!";
-                document.getElementById("message").style.display = "block";
-                document.getElementById("message").style.backgroundColor = "green";
-                document.getElementById("message").style.color = "beige";
-                document.getElementById("submit-button").disabled = false;
-                document.getElementById("form").reset();
-        
-                setTimeout(function () {
-                  document.getElementById("message").textContent = "";
-                  document.getElementById("message").style.display = "none";
-                }, 2600);
-              })
-              .catch(function (error) {
-                // Handle errors, you can display an error message here
-                console.error(error);
-                document.getElementById("message").textContent =
-                  "An error occurred while submitting the form.";
-                document.getElementById("message").style.display = "block";
-              });
-          });
-    </script>
-  </body>
-  </html>
+    // Function to populate the block select options based on the selected area
+    function populateBlockOptions() {
+      var areaSelect = document.getElementById("areaSelect");
+      var blockSelect = document.getElementById("blockSelect");
+      var selectedArea = areaSelect.value;
+  
+      blockSelect.innerHTML = ""; // Clear previous options
+  
+      if (blocksByArea.hasOwnProperty(selectedArea)) {
+        var blocks = blocksByArea[selectedArea];
+        blocks.forEach(function (block) {
+          var option = document.createElement("option");
+          option.value = block;
+          option.text = block;
+          blockSelect.appendChild(option);
+        });
+      }
+      
+      // Update delivery amount based on selected delivery type
+      updateDeliveryAmount();
+     }
+       
+     
+      // استدعاء الدالة updateDeliveryAmount عند تحميل الصفحة
+      window.addEventListener("load", function() {
+          var expressRadio = document.querySelector('input[name="Delivery Type"][value="Express"]');
+          expressRadio.checked = true; // تحديد خيار "Express" كمحدد مبدئيًا
+          updateDeliveryAmount(); // استدعاء الدالة لتحديث مبلغ التسليم
+      });
+
+  // Function to update delivery amount based on selected delivery type
+  function updateDeliveryAmount() {
+      var expressRadio = document.querySelector('input[name="Delivery Type"][value="Express"]');
+      var superExpressRadio = document.querySelector('input[name="Delivery Type"][value="Super Express"]');
+      var deliveryAmountInput = document.getElementById("deliveryAmountInput");
+      var selectedDeliveryType = "";
+
+      if (expressRadio.checked) {
+       selectedDeliveryType = "Express";
+       deliveryAmountInput.value = "0.850";
+       } else if (superExpressRadio.checked) {
+        selectedDeliveryType = "Super Express";
+        deliveryAmountInput.value = "1";
+      }
+
+    calculateTotalAmount(); // Call the function to update the total amount
+}
+
+  function calculateTotalAmount() {
+    var orderAmountInput = document.getElementById("orderAmountInput");
+    var deliveryAmountInput = document.getElementById("deliveryAmountInput");
+    var totalAmountInput = document.getElementById("totalAmountInput");
+
+    var orderAmount = parseFloat(orderAmountInput.value);
+    var deliveryAmount = parseFloat(deliveryAmountInput.value);
+    var totalAmount = orderAmount + deliveryAmount;
+
+  totalAmountInput.value = totalAmount.toFixed(3);
+  // استدعاء الدالة calculateTotalAmount عند تغير قيمة Order Amount (BHD)
+    var orderAmountInput = document.getElementById("orderAmountInput");
+  orderAmountInput.addEventListener("input", calculateTotalAmount);
+}
+  function clearData() {
+  // تحديد العناصر التي تحتوي على البيانات التي تريد مسحها
+    var inputElements = document.querySelectorAll('input');
+    var textareaElements = document.querySelectorAll('textarea');
+
+    // مسح قيم العناصر
+    inputElements.forEach(function(input) {
+      input.value = '';
+    });
+
+    textareaElements.forEach(function(textarea) {
+      textarea.value = '';
+    });
+  }
+
+
+    
+    // Rest of the script
+    document.getElementById("form").addEventListener("submit", function (e) {
+
+      var button = document.getElementById("submit-button");
+      button.classList.add("is-loading");
+      button.textContent = "Loading";
+      // التحقق من ملء جميع الحقول المطلوبة
+      var clientName = document.querySelector('input[name="Client Name"]').value;
+      var paymentMethod = document.querySelector(
+          'input[name="Payment Method"]:checked'
+          );
+      var orderAmount = document.querySelector('input[name="Order Amount"]').value;
+      var deliveryType = document.querySelector(
+          'input[name="Delivery Type"]:checked'
+          );
+      var customerName = document.querySelector('input[name="Customer Name"]').value;
+      var customerNumber = document.querySelector('input[name="Customer Number"]').value;
+      var area = document.querySelector('select[name="Area"]').value;
+      var block = document.querySelector('select[name="Block"]').value;
+      var road = document.querySelector('input[name="Road"]').value;
+      var house = document.querySelector('input[name="House"]').value;
+      var deliveryTime = document.querySelector(
+          'input[name="Delivery Time"]:checked'
+          );
+
+      // قم بالتحقق من ملء الحقول الأخرى بنفس الطريقة
+      if (
+          clientName &&
+          paymentMethod &&
+          orderAmount &&
+          deliveryType &&
+          customerName &&
+          customerNumber &&
+          area &&
+          block &&
+          road &&
+          house
+          &&
+          deliveryTime) {
+        // قم بإرسال البيانات
+        var formData = new FormData(this);
+        // ... قم بإرسال البيانات إلى السكريبت الخاص بك ...
+      } else {
+        // عرض رسالة خطأ بأنه يجب ملء جميع الحقول المطلوبة
+        alert("Please fill out all required fields");
+        return false; // إلغاء عملية ال Submit وعدم إرسال البيانات
+      }
+      e.preventDefault(); // Prevent the default form submission
+      
+      document.getElementById("message").innerHTML = ' <span class="tag is-warning is-light">Submitting..</span>';
+      document.getElementById("message").style.display = "block";
+
+
+
+      document.getElementById("submit-button").disabled = true;
+  
+      // Collect the form data
+      var formData = new FormData(this);
+      var keyValuePairs = [];
+      for (var pair of formData.entries()) {
+        keyValuePairs.push(pair[0] + "=" + pair[1]);
+      }
+  
+      var formDataString = keyValuePairs.join("&");
+
+
+
+
+      
+  
+
+      // Send a POST request to your Google Apps Script
+      fetch(
+        "https://script.google.com/macros/s/AKfycbzPoGfHotKti46LbYIaeHtRydAwCs6Cci4NZUJD5l4rGZSiRxmNmlTn8DB6L_84D4zpdg/exec",
+        {
+          redirect: "follow",
+          method: "POST",
+          body: formDataString,
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+        }
+      )
+        .then(function (response) {
+          // Check if the request was successful
+          if (response) {
+            return response; // Assuming your script returns JSON response
+          } else {
+            throw new Error("Failed to submit the form.");
+          }
+        })
+        .then(function (data) {
+          // Display a success message
+          document.getElementById("message").innerHTML = ' <span class="tag is-success is-light">Success</span>';
+          document.getElementById("message").style.display = "block";
+          document.getElementById("message").style.backgroundColor = "green";
+          document.getElementById("message").style.color = "beige";
+          document.getElementById("submit-button").disabled = false;
+          document.getElementById("form").reset();
+  
+          setTimeout(function() {
+           button.classList.remove("is-loading");
+           button.textContent = "Submit";
+           document.getElementById("message").innerHTML = ' <span class="tag is-success is-light">Submitted!</span>';
+          }, 2000); // يمكنك تعديل الوقت (بالميلي ثانية) حسب الحاجة
+        })
+        .catch(function (error) {
+          // Handle errors, you can display an error message here
+          console.error(error);
+          document.getElementById("message").textContent =
+            "An error occurred while submitting the form.";
+          document.getElementById("message").style.display = "block";
+        });
+    });
+</script>
+</body>
+</html>
